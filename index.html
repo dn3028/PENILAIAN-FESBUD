@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f1e7">
+  <title>Rata-rata Nilai per Kelas — Marghantara 2026</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f1e7;
+      --card: #fffdf8;
+      --ink: #173c3b;
+      --muted: #6f7d73;
+      --line: #e6dece;
+      --teal: #226b62;
+      --deep: #173f3b;
+      --coral: #d97758;
+      --gold: #d8a94e;
+      --blue: #78a7a5;
+      --soft: #edf2e9;
+      --shadow: 0 18px 50px rgba(30, 59, 49, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 91% 4%, rgba(216, 169, 78, .13), transparent 25rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    button, select { font: inherit; }
+    a { color: inherit; }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 23px 0;
+      border-bottom: 1px solid rgba(23, 60, 59, .12);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--coral);
+      font-family: Georgia, serif;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .brand-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand-subtitle {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .event-meta {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      align-items: center;
+      gap: 36px;
+      min-height: 310px;
+      padding: 55px 0 45px;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 27px;
+      height: 1px;
+      background: var(--coral);
+      content: "";
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 720px;
+      margin-bottom: 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 6vw, 66px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: 1.02;
+    }
+
+    h1 em {
+      color: var(--coral);
+      font-weight: 500;
+    }
+
+    .hero-copy {
+      max-width: 600px;
+      margin-bottom: 0;
+      color: #64746b;
+      font-size: 16px;
+    }
+
+    .hero-seal {
+      display: grid;
+      width: 190px;
+      height: 190px;
+      place-items: center;
+      justify-self: center;
+      border: 1px solid rgba(216, 169, 78, .7);
+      border-radius: 50%;
+      color: var(--deep);
+      text-align: center;
+      transform: rotate(8deg);
+    }
+
+    .hero-seal::before {
+      position: absolute;
+      width: 164px;
+      height: 164px;
+      border: 1px dashed rgba(34, 107, 98, .4);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .seal-inner { transform: rotate(-8deg); }
+    .seal-symbol { display: block; color: var(--coral); font-size: 33px; line-height: 1.1; }
+    .seal-title { display: block; font-family: Georgia, serif; font-size: 17px; }
+    .seal-year { display: block; color: var(--muted); font-size: 10px; letter-spacing: .2em; }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin: 11px 0 17px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      font-weight: 500;
+      letter-spacing: -.02em;
+    }
+
+    .section-kicker {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .controls select {
+      min-width: 190px;
+      padding: 10px 38px 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 13px;
+      margin-bottom: 18px;
+    }
+
+    .stat-card, .panel, .table-panel {
+      border: 1px solid rgba(23, 60, 59, .08);
+      border-radius: 10px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card { min-height: 119px; padding: 17px 18px; }
+
+    .stat-label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      display: block;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 29px;
+      line-height: 1.15;
+    }
+
+    .stat-note { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; }
+
+    .quartile-card {
+      grid-column: span 4;
+      display: grid;
+      grid-template-columns: 1.2fr repeat(3, 1fr);
+      align-items: center;
+      min-height: 94px;
+      padding: 16px 19px;
+      border: 1px solid rgba(34, 107, 98, .14);
+      border-radius: 10px;
+      background: var(--soft);
+    }
+
+    .quartile-intro strong { display: block; font-family: Georgia, serif; font-size: 18px; font-weight: 500; }
+    .quartile-intro span { color: var(--muted); font-size: 11px; }
+    .quartile-value { padding-left: 18px; border-left: 1px solid rgba(23, 60, 59, .12); }
+    .quartile-value span { display: block; color: var(--muted); font-size: 11px; font-weight: 700; }
+    .quartile-value strong { font-family: Georgia, serif; font-size: 24px; font-weight: 500; }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(280px, .85fr);
+      gap: 16px;
+      margin-bottom: 34px;
+    }
+
+    .panel { min-width: 0; padding: 20px; }
+
+    .panel-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .panel-heading h3 { margin: 0; font-family: Georgia, serif; font-size: 18px; font-weight: 500; }
+    .panel-heading p { margin: 3px 0 0; color: var(--muted); font-size: 11px; }
+    .chart-label { color: var(--teal); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .bar-wrap { overflow-x: auto; }
+    .bar-chart { display: block; width: 100%; min-width: 530px; height: auto; }
+    .pie-layout { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(105px, .9fr); align-items: center; gap: 8px; }
+    .pie-chart { display: block; width: 100%; max-width: 230px; height: auto; margin: auto; }
+    .legend { display: grid; gap: 8px; padding: 0; margin: 0; list-style: none; }
+    .legend li { display: grid; grid-template-columns: 9px 1fr auto; align-items: center; gap: 7px; color: #596c63; font-size: 11px; }
+    .legend-swatch { width: 8px; height: 8px; border-radius: 50%; }
+    .legend strong { color: var(--ink); font-size: 11px; }
+
+    .table-panel { overflow: hidden; margin-bottom: 19px; }
+    .table-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+      padding: 20px 21px 14px;
+    }
+    .table-top h2 { margin: 0; font-family: Georgia, serif; font-size: 22px; font-weight: 500; }
+    .table-top p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; min-width: 420px; border-collapse: collapse; text-align: center; font-size: 12px; }
+    thead { background: #f1eee5; color: var(--muted); }
+    th { padding: 11px 8px; font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+    td { padding: 12px 8px; border-top: 1px solid #eee9df; color: #495e55; font-variant-numeric: tabular-nums; }
+    tbody tr:hover { background: #faf8f1; }
+    .class-cell { color: var(--deep); font-weight: 800; }
+    .mean-cell { color: var(--teal); font-weight: 800; }
+    .table-footnote { padding: 11px 20px 14px; color: var(--muted); font-size: 11px; }
+
+    .method-note {
+      display: flex;
+      gap: 11px;
+      padding: 15px 18px;
+      border-left: 3px solid var(--gold);
+      background: rgba(255, 253, 248, .7);
+      color: #627168;
+      font-size: 12px;
+    }
+    .method-note strong { color: var(--deep); }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 24px 0 31px;
+      margin-top: 29px;
+      border-top: 1px solid rgba(23, 60, 59, .12);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr 120px; gap: 12px; min-height: 255px; padding: 40px 0 32px; }
+      .hero-seal { width: 116px; height: 116px; }
+      .hero-seal::before { width: 99px; height: 99px; }
+      .seal-symbol { font-size: 24px; }
+      .seal-title { font-size: 13px; }
+      .seal-year { font-size: 8px; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .quartile-card { grid-column: span 2; grid-template-columns: repeat(3, 1fr); gap: 13px 0; }
+      .quartile-intro { grid-column: span 3; }
+      .quartile-value:nth-child(2) { padding-left: 0; border-left: 0; }
+      .pie-layout { grid-template-columns: 190px 1fr; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .page-shell { width: min(100% - 28px, 1120px); }
+      .topbar { padding: 17px 0; }
+      .brand-name { font-size: 15px; }
+      .event-meta { font-size: 11px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-seal { display: none; }
+      .hero-copy { font-size: 14px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 8px; }
+      .controls { align-items: start; flex-direction: column; }
+      .controls select { width: 100%; }
+      .stat-card { min-height: 105px; padding: 14px; }
+      .stat-value { font-size: 25px; }
+      .quartile-card { padding: 15px; }
+      .quartile-value { padding-left: 11px; }
+      .quartile-value strong { font-size: 21px; }
+      .panel { padding: 16px; }
+      .pie-layout { grid-template-columns: 1fr; }
+      .pie-chart { max-width: 190px; }
+      .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#beranda" aria-label="Penilaian Ujian Praktik kelas XII 1-XII 10 ">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span>
+          <span class="brand-name">Penilaian Ujian Praktik kelas XII 1-XII 10</span>
+          <span class="brand-subtitle">Festival Budaya Marghantara 2026</span>
+        </span>
+      </a>
+      <div class="event-meta">Marghantara<br>14 November 2026</div>
+    </header>
+
+    <main id="beranda">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Tugas Statistika Matemaitka Wajib</p>
+          <h1 id="page-title">Kelompok 6<br><em>Anggota Kelompok :</em></h1>
+          <p class="hero-copy">Daniel Eleazar Tanu</p>
+          <p class="hero-copy">Dabith Hilmi Wildany </p>
+          <p class="hero-copy">Gennadri Danias Ramadha</p>
+          <p class="hero-copy">Gwen Nathaly Sitompul</p>
+          <p class="hero-copy">Malika Cyra Pratama</p>
+          <p class="hero-copy">Maudyna Malika Jebbrilla</p>
+        </div>
+        <div class="hero-seal" aria-hidden="true">
+          <div class="seal-inner">
+            <span class="seal-symbol">❋</span>
+            <span class="seal-title">Marghantara</span>
+            <span class="seal-year">FESTIVAL BUDAYA · 2026</span>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="overview-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Ringkasan penilaian</p>
+            <h2 id="overview-title">Apresiasi per angkatan</h2>
+          </div>
+        </div>
+
+        <label class="controls" for="aspect-select">
+          Aspek yang ditampilkan
+          <select id="aspect-select">
+            <option value="creativity">Kreativitas</option>
+            <option value="teamwork">Kekompakan</option>
+          </select>
+        </label>
+
+        <div class="stats-grid" aria-live="polite">
+          <article class="stat-card">
+            <span class="stat-label">Mean · rata-rata</span>
+            <strong class="stat-value" id="mean-value">—</strong>
+            <span class="stat-note">Rata-rata nilai 10 kelas</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Median · nilai tengah</span>
+            <strong class="stat-value" id="median-value">—</strong>
+            <span class="stat-note">Titik tengah data terurut</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Modus · paling sering</span>
+            <strong class="stat-value" id="mode-value">—</strong>
+            <span class="stat-note" id="mode-note">Frekuensi nilai kelas</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Jumlah kelas</span>
+            <strong class="stat-value">10</strong>
+            <span class="stat-note">XII-1 sampai XII-10</span>
+          </article>
+          <article class="quartile-card">
+            <div class="quartile-intro">
+              <strong>Kuartil</strong>
+              <span>Nilai sesuai dengan nilai tabel yang ada</span>
+            </div>
+            <div class="quartile-value"><span>Q1 · posisi 3</span><strong id="q1-value">—</strong></div>
+            <div class="quartile-value"><span>Q2 · posisi 6</span><strong id="q2-value">—</strong></div>
+            <div class="quartile-value"><span>Q3 · posisi 9</span><strong id="q3-value">—</strong></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="charts-grid" aria-label="Visualisasi nilai per kelas">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Nilai rata-rata per kelas</h3>
+              <p>Perbandingan nilai untuk aspek terpilih</p>
+            </div>
+            <span class="chart-label">Diagram batang</span>
+          </div>
+          <div class="bar-wrap">
+            <svg id="bar-chart" class="bar-chart" viewBox="0 0 780 320" role="img" aria-label="Diagram batang nilai rata-rata per kelas"></svg>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Sebaran nilai kelas</h3>
+              <p>Frekuensi nilai rata-rata dari 10 kelas</p>
+            </div>
+            <span class="chart-label">Diagram lingkaran</span>
+          </div>
+          <div class="pie-layout">
+            <svg id="pie-chart" class="pie-chart" viewBox="0 0 240 240" role="img" aria-label="Diagram lingkaran frekuensi nilai"></svg>
+            <ul id="pie-legend" class="legend" aria-label="Keterangan frekuensi nilai"></ul>
+          </div>
+        </article>
+      </section>
+
+      <section aria-labelledby="data-title">
+        <div class="table-panel">
+          <div class="table-top">
+            <div>
+              <p class="section-kicker">Data sumber · 10 kelas</p>
+              <h2 id="data-title">Nilai rata-rata tiap kelas</h2>
+              <p>Tabel Nilai Kreativitas dan Kekompakan dari hasil pengamatan pada festival Budaya Marghantara 2026.</p>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Kelas</th>
+                  <th scope="col">Kreativitas</th>
+                  <th scope="col">Kekompakan</th>
+                </tr>
+              </thead>
+              <tbody id="average-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <aside class="method-note">
+        <span aria-hidden="true">✳</span>
+        <div><strong>Catatan data:</strong> Statistik dan diagram dihitung dari nilai rata-rata 10 kelas. Kuartil ditampilkan mengikuti nilai dan letak Q1, Q2, dan Q3 yang tertulis pada lembar kerja.</div>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Festival Budaya Marghantara 2026</span>
+      <span>Apresiasi untuk setiap karya dan kebersamaan.</span>
+    </footer>
+  </div>
+
+  <script>
+    const classes = [
+      { name: "XII-1", creativity: 95, teamwork: 92 },
+      { name: "XII-2", creativity: 89, teamwork: 90 },
+      { name: "XII-3", creativity: 90, teamwork: 90 },
+      { name: "XII-4", creativity: 92, teamwork: 91 },
+      { name: "XII-5", creativity: 94, teamwork: 95 },
+      { name: "XII-6", creativity: 91, teamwork: 90 },
+      { name: "XII-7", creativity: 91, teamwork: 93 },
+      { name: "XII-8", creativity: 91, teamwork: 92 },
+      { name: "XII-9", creativity: 92, teamwork: 93 },
+      { name: "XII-10", creativity: 92, teamwork: 91 }
+    ];
+
+    const aspects = {
+      creativity: { label: "Kreativitas", quartiles: [91, 92, 94] },
+      teamwork: { label: "Kekompakan", quartiles: [90, 92, 93] }
+    };
+    const colors = ["#226b62", "#d97758", "#d8a94e", "#78a7a5", "#9d7958", "#516b52", "#bd9671"];
+    const numberFormat = new Intl.NumberFormat("id-ID", { maximumFractionDigits: 1 });
+    const svgNS = "http://www.w3.org/2000/svg";
+
+    function svgElement(tag, attributes, text) {
+      const element = document.createElementNS(svgNS, tag);
+      Object.entries(attributes || {}).forEach(([key, value]) => element.setAttribute(key, value));
+      if (text !== undefined) element.textContent = text;
+      return element;
+    }
+
+    function getFrequencies(values) {
+      const counts = new Map();
+      values.forEach(value => counts.set(value, (counts.get(value) || 0) + 1));
+      return [...counts.entries()].sort((a, b) => a[0] - b[0]);
+    }
+
+    function drawBarChart(aspectKey, values) {
+      const svg = document.getElementById("bar-chart");
+      svg.replaceChildren();
+      const left = 43, top = 23, chartHeight = 218, baseY = top + chartHeight;
+      const min = 80, max = 100;
+      [80, 85, 90, 95, 100].forEach(tick => {
+        const y = baseY - ((tick - min) / (max - min)) * chartHeight;
+        svg.append(
+          svgElement("line", { x1: left, y1: y, x2: 768, y2: y, stroke: "#e9e5db", "stroke-width": 1 }),
+          svgElement("text", { x: 34, y: y + 4, "text-anchor": "end", fill: "#829087", "font-size": 10 }, String(tick))
+        );
+      });
+      svg.append(svgElement("text", { x: 44, y: 13, fill: "#829087", "font-size": 9 }, "NILAI"));
+      const slotWidth = (768 - left) / classes.length;
+      const barWidth = Math.min(37, slotWidth * .56);
+      classes.forEach((item, index) => {
+        const value = values[index];
+        const height = ((value - min) / (max - min)) * chartHeight;
+        const x = left + index * slotWidth + (slotWidth - barWidth) / 2;
+        const y = baseY - height;
+        const barColor = index === 4 ? "#d97758" : "#438276";
+        svg.append(
+          svgElement("rect", { x, y, width: barWidth, height, rx: 4, fill: barColor }),
+          svgElement("text", { x: x + barWidth / 2, y: y - 7, "text-anchor": "middle", fill: "#173c3b", "font-size": 10, "font-weight": 700 }, String(value)),
+          svgElement("text", { x: x + barWidth / 2, y: baseY + 19, "text-anchor": "middle", fill: "#6f7d73", "font-size": 9 }, classes[index].name.replace("XII-", ""))
+        );
+      });
+      svg.append(svgElement("text", { x: 405, y: 285, "text-anchor": "middle", fill: "#829087", "font-size": 10 }, "KELAS XII"));
+      svg.setAttribute("aria-label", `Diagram batang nilai rata-rata ${aspects[aspectKey].label} untuk 10 kelas`);
+    }
+
+    function drawPieChart(aspectKey, values) {
+      const svg = document.getElementById("pie-chart");
+      const legend = document.getElementById("pie-legend");
+      svg.replaceChildren();
+      legend.replaceChildren();
+      const frequencies = getFrequencies(values);
+      const total = values.length;
+      let angle = -Math.PI / 2;
+      const cx = 120, cy = 120, radius = 94;
+      frequencies.forEach(([score, count], index) => {
+        const slice = (count / total) * Math.PI * 2;
+        const endAngle = angle + slice;
+        if (count === total) {
+          svg.append(svgElement("circle", { cx, cy, r: radius, fill: colors[index % colors.length] }));
+        } else {
+          const x1 = cx + radius * Math.cos(angle), y1 = cy + radius * Math.sin(angle);
+          const x2 = cx + radius * Math.cos(endAngle), y2 = cy + radius * Math.sin(endAngle);
+          const largeArc = slice > Math.PI ? 1 : 0;
+          const path = `M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+          svg.append(svgElement("path", { d: path, fill: colors[index % colors.length], stroke: "#fffdf8", "stroke-width": 2 }));
+        }
+        angle = endAngle;
+        const item = document.createElement("li");
+        const swatch = document.createElement("span");
+        swatch.className = "legend-swatch";
+        swatch.style.backgroundColor = colors[index % colors.length];
+        const label = document.createElement("span");
+        label.textContent = `${score} · ${Math.round(count / total * 100)}%`;
+        const frequency = document.createElement("strong");
+        frequency.textContent = `${count} kelas`;
+        item.append(swatch, label, frequency);
+        legend.append(item);
+      });
+      svg.append(
+        svgElement("circle", { cx, cy, r: 49, fill: "#fffdf8" }),
+        svgElement("text", { x: cx, y: cy - 3, "text-anchor": "middle", fill: "#173c3b", "font-size": 25, "font-family": "Georgia, serif" }, String(total)),
+        svgElement("text", { x: cx, y: cy + 15, "text-anchor": "middle", fill: "#6f7d73", "font-size": 9, "letter-spacing": 1 }, "KELAS")
+      );
+      svg.setAttribute("aria-label", `Diagram lingkaran sebaran nilai ${aspects[aspectKey].label}`);
+    }
+
+    function renderStatistics() {
+      const aspectKey = document.getElementById("aspect-select").value;
+      const values = classes.map(item => item[aspectKey]);
+      const sorted = [...values].sort((a, b) => a - b);
+      const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+      const median = (sorted[4] + sorted[5]) / 2;
+      const frequencies = getFrequencies(values);
+      const highestFrequency = Math.max(...frequencies.map(([, count]) => count));
+      const modes = frequencies.filter(([, count]) => count === highestFrequency).map(([score]) => score);
+
+      document.getElementById("mean-value").textContent = numberFormat.format(mean);
+      document.getElementById("median-value").textContent = numberFormat.format(median);
+      document.getElementById("mode-value").textContent = modes.join(" & ");
+      document.getElementById("mode-note").textContent = `${highestFrequency} kelas untuk tiap nilai modus`;
+      const [q1, q2, q3] = aspects[aspectKey].quartiles;
+      document.getElementById("q1-value").textContent = q1;
+      document.getElementById("q2-value").textContent = q2;
+      document.getElementById("q3-value").textContent = q3;
+      drawBarChart(aspectKey, values);
+      drawPieChart(aspectKey, values);
+    }
+
+    function renderTable() {
+      const body = document.getElementById("average-table");
+      classes.forEach(item => {
+        const row = document.createElement("tr");
+        const classCell = document.createElement("th");
+        classCell.className = "class-cell";
+        classCell.scope = "row";
+        classCell.textContent = item.name;
+        row.append(classCell);
+        [item.creativity, item.teamwork].forEach(value => {
+          const cell = document.createElement("td");
+          cell.className = "mean-cell";
+          cell.textContent = value;
+          row.append(cell);
+        });
+        body.append(row);
+      });
+    }
+
+    document.getElementById("aspect-select").addEventListener("change", renderStatistics);
+    renderTable();
+    renderStatistics();
+  </script>
+</body>
+</html>
